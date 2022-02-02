@@ -38,5 +38,4 @@ states.sort()
 for state in states:
     mean_income_per_state[state] = df[df.state == state].avg_area_income.sum().round(2)
 
-if __name__ == '__main__':
-    print(sorted(mean_income_per_state.items(), key=lambda kv: kv[1], reverse=True))
+sorted(mean_income_per_state.items(), key=lambda kv: kv[1], reverse=True)
