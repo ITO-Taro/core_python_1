@@ -1,0 +1,9 @@
+************* Module us_housing
+us_housing.py:36:0: C0304: Final newline missing (missing-final-newline)
+us_housing.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+us_housing.py:3:5: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+us_housing.py:29:0: W0105: String statement has no effect (pointless-string-statement)
+
+------------------------------------------------------------------
+Your code has been rated at 8.33/10 (previous run: 8.33/10, +0.00)
+
