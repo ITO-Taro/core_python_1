@@ -34,8 +34,9 @@ for num in df.index:
 
 mean_income_per_state = {}
 states = df.state.unique()
-states.sort()
 for state in states:
-    mean_income_per_state[state] = df[df.state == state].avg_area_income.sum().round(2)
+    df = df[df.state == state].avg_area_income
+    size = df.count()
+    mean_income_per_state[state] = round(df.sum()/size, 2)
 
 sorted(mean_income_per_state.items(), key=lambda kv: kv[1], reverse=True)
