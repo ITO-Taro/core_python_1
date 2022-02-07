@@ -5,8 +5,9 @@ Exercise: download USA_Housing.csv and perform the following tasks
 """
 
 import pandas as pd
+from IPython.display import display
 
-PATH = "/Users/taro/Desktop/Code_Immersives/PY131/us_housing"
+PATH = "/Users/taro/Desktop/Code_Immersives/PY131/core_python/us_housing"
 with open(PATH+'/us_housing.csv', 'r', encoding="utf8") as file:
     line = file.readline()
     line = line.replace(".", "").replace(" ", "_").lower()
@@ -33,10 +34,10 @@ for num in df.index:
     df.loc[num, 'zip_code'] = addresses[-1]
 
 mean_income_per_state = {}
-states = df.state.unique()
-for state in states:
-    df = df[df.state == state].avg_area_income
-    size = df.count()
-    mean_income_per_state[state] = round(df.sum()/size, 2)
+for state in df.state.unique():
+    incomes = df[df.state == state].avg_area_income
+    mean_income_per_state[state] = incomes.mean().round(2)
 
-sorted(mean_income_per_state.items(), key=lambda kv: kv[1], reverse=True)
+# sorted(mean_income_per_state.items(), key=lambda kv: kv[1], reverse=True)
+test = max(mean_income_per_state, key=mean_income_per_state.get)
+display(test)
