@@ -1,22 +1,26 @@
 "python core exercise class PY131"
+
+
+
 class PythonCoreExercise:
     "contians char_counter, char_manipulation, & distance funcs"
 
-    def __init__(self, var_x, var_y):
-        self.var_x = var_x
-        self.var_y = var_y
+    # def __init__(self, var_x, var_y):
+    #     self.var_x = var_x
+    #     self.var_y = var_y
 
     @classmethod
     def find_modes(cls, var_x):
         "finds duplicated values amd return them in dictionary format ('vallues': 'frequency')"
         data, modes = {}, {}
-        var_x.sort()
+        lst_x = [i for i in var_x]
+        lst_x.sort()
         cnt = 1
-        for num in range(1, len(var_x)):
-            if var_x[num] == var_x[num-1]:
+        for num in range(1, len(lst_x)):
+            if lst_x[num] == lst_x[num-1]:
                 cnt += 1
             else:
-                data[var_x[num-1]] = cnt
+                data[lst_x[num-1]] = cnt
                 cnt = 1
         for key, val in data.items():
             if val == max(data.values()) and val > 1:
@@ -52,8 +56,6 @@ class PythonCoreExercise:
         "takes two strings & transform the former to the latter and returns it"
         if var_one != var_two:
             caps = [var_two.index(i) for i in var_two if i.isupper()]
-            # var_two = [i for i in var_two]
-            # var_two = [i for i in var_two]
             common = [i for i in var_one if i in var_two]
             only_var_two = [i for i in var_two if not i in common]
             var_one = list(set(common+only_var_two))
@@ -73,10 +75,16 @@ class PythonCoreExercise:
 
     def distance(self, str_x, str_y):
         "returns the minimum number of operations required to trnasform str_x to str_y"
-        if str_x != str_y:
-            # str_y = [i for i in str_y]
-            cnt = 0
-            common = [i for i in str_x if i in str_y]
-            only_y = [i for i in str_y if not i in common]
-            # only_x = [i for i in str_x if not i in str_y]
-            cnt += len(only_y)
+        num_1, num_2 = len(str_x), len(str_y)
+        matrix = [[i+j for j in range(num_2+1)] for i in range(num_1+1)]
+        for i in range(1, num_1+1):
+            for j in range(1, num_2+1):
+                if str_x[i-1] == str_y[j-1]:
+                    d = 0
+                else:
+                    d = 1
+                matrix[i][j] = min(matrix[i-1][j]+1, matrix[i][j-1], matrix[i][j]+d)
+        return matrix[-1][-1]
+
+    def is_anagram(self, word_1, word_2):
+        return sorted(word_1) == sorted(word_2)
